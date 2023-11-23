@@ -11,10 +11,10 @@ pub async fn page(req: HttpRequest) -> ActixResult<Markup> {
 
     let content =
         html! {
-        div {
-            p { "Hello, World!" }
-        }
-    };
+            div  {
+                p class="text-red-500" { "Hello, Worlds!" }
+             }
+        };
 
     Ok(index(req, content, title, desc).await)
 }

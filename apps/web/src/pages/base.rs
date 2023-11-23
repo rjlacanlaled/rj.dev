@@ -5,12 +5,12 @@ use maud::{ html, Markup, DOCTYPE, PreEscaped };
 fn body(content: Markup) -> Markup {
     html! {
         body {
+            style { "font-family: Inter, sans-serif" }
             (content)
             script src="../static/js/htmx.min.js" {}
             script src="https://unpkg.com/hyperscript.org@0.9.12" {}
             // TODO: Google Analytics: change UA-XXXXX-Y to be your site's ID.
             (google_analytics("UA-XXXXX-Y"))
-            style { "font-family: 'Inter', sans-serif;" }
             // Non-H5BP editorial comment: please consider using another analytics solution
             // instead of gifting your users' data to Alphabet Inc. - see e.g.
             // <https://mentalpivot.com/ethical-web-analytics-alternatives-google/>
@@ -40,6 +40,9 @@ fn head(title: &str, desc: &str, url: &str) -> Markup {
             meta property="og:url" content=(url);
             meta property="og:image" content="";
             meta name="theme-color" content="#fafafa";
+            link rel="preconnect" href="https://fonts.googleapis.com";
+            link rel="preconnect" href="https://fonts.gstatic.com" crossorigin;
+            link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap";
             link rel="stylesheet" href="../static/css/output.css";
         }
     }
@@ -60,7 +63,7 @@ pub async fn index(req: HttpRequest, child_content: Markup, title: &str, desc: &
     let lang = "en";
     let content =
         html! {
-        #content class = "min-h-screen font-sans antialiased grainy bg-gradient-to-r from-gray-100 to-gray-30" {
+            #content class = "min-h-screen font-sans antialiased grainy bg-gradient-to-r from-gray-100 to-gray-30" {
             (child_content)
         }
     };
