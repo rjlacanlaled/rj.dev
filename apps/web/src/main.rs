@@ -13,9 +13,9 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .service(pages::home::page)
-            .service(ActixFiles::new("/", "./src/static").prefer_utf8(true))
+            .service(ActixFiles::new("/", "./apps/web/static").prefer_utf8(true))
             .default_service(route().to(not_found))
     })
-        .bind(("127.0.0.1", 8080))?
+        .bind(("0.0.0.0", 3000))?
         .run().await
 }
