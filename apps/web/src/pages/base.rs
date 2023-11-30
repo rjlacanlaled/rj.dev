@@ -1,10 +1,10 @@
 use crate::strings;
-use actix_web::{HttpRequest, Responder};
-use maud::{html, Markup, PreEscaped, DOCTYPE};
+use actix_web::{ HttpRequest, Responder };
+use maud::{ html, Markup, PreEscaped, DOCTYPE };
 
 fn body(content: Markup) -> Markup {
     html! {
-        body class="mx-auto min-h-screen max-w-screen-xl px-6 py-12 font-sans md:px-12 md:py-20 lg:px-24 lg:py-0 bg-slate-900"
+        body class="max-w-screen-xl px-6 py-12 mx-auto overflow-auto md:px-12 md:py-20 lg:px-24 lg:py-0 bg-slate-900 "
         {
             style { "font-family: Inter, sans-serif" }
             (content)
@@ -44,6 +44,7 @@ fn head(title: &str, desc: &str, url: &str) -> Markup {
             link rel="preconnect" href="https://fonts.googleapis.com";
             link rel="preconnect" href="https://fonts.gstatic.com" crossorigin;
             link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap";
+            
             link rel="stylesheet" href="/css/output.css";
         }
     }
@@ -62,8 +63,9 @@ pub fn page(host: &str, title: &str, desc: &str, lang: &str, content: Markup) ->
 pub async fn index(req: HttpRequest, child_content: Markup, title: &str, desc: &str) -> Markup {
     let host = format!("{}", req.uri());
     let lang = "en";
-    let content = html! {
-            #content class = "bg-slate-900 leading-relaxed text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900" {
+    let content =
+        html! {
+            #content class = "antialiased leading-relaxed bg-slate-900 text-slate-400 selection:bg-teal-300 selection:text-teal-900" {
             (child_content)
         }
     };

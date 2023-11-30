@@ -1,4 +1,4 @@
-use maud::{html, Markup};
+use maud::{ html, Markup };
 
 pub struct Social {
     pub name: String,
@@ -14,7 +14,7 @@ impl Social {
 
 pub fn render(socials: Vec<Social>) -> Markup {
     html! {
-        ul class="ml-1 mt-8 flex items-center" {
+        ul class="flex items-center mt-8 ml-1" {
             @for social in socials {
                 li class="mr-5 text-xs" {
                     a class="block hover:text-slate-200" href=(social.url) target="_blank" rel="noopener noreferrer" {
