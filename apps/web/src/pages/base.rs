@@ -1,10 +1,11 @@
 use crate::strings;
-use actix_web::{ Responder, HttpRequest };
-use maud::{ html, Markup, DOCTYPE, PreEscaped };
+use actix_web::{HttpRequest, Responder};
+use maud::{html, Markup, PreEscaped, DOCTYPE};
 
 fn body(content: Markup) -> Markup {
     html! {
-        body {
+        body class="mx-auto min-h-screen max-w-screen-xl px-6 py-12 font-sans md:px-12 md:py-20 lg:px-24 lg:py-0 bg-slate-900"
+        {
             style { "font-family: Inter, sans-serif" }
             (content)
             script src="/js/htmx.min.js" {}
@@ -61,9 +62,8 @@ pub fn page(host: &str, title: &str, desc: &str, lang: &str, content: Markup) ->
 pub async fn index(req: HttpRequest, child_content: Markup, title: &str, desc: &str) -> Markup {
     let host = format!("{}", req.uri());
     let lang = "en";
-    let content =
-        html! {
-            #content class = "min-h-screen font-sans antialiased grainy bg-gradient-to-r from-gray-100 to-gray-30" {
+    let content = html! {
+            #content class = "bg-slate-900 leading-relaxed text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900" {
             (child_content)
         }
     };
