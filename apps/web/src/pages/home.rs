@@ -1,7 +1,10 @@
 use actix_web::{ get, HttpRequest, Result as ActixResult };
 use maud::{ html, Markup };
 
-use crate::{ components::{ about_section, header, experience_section }, pages::base::index };
+use crate::{
+    components::{ about_section, header, experience_section, project_section, footer },
+    pages::base::index,
+};
 
 #[get("/")]
 pub async fn page(req: HttpRequest) -> ActixResult<Markup> {
@@ -15,6 +18,8 @@ pub async fn page(req: HttpRequest) -> ActixResult<Markup> {
                     ( header::render() )
                     ( about_section::render() )
                     ( experience_section::render() )
+                    ( project_section::render() ) 
+                    ( footer::render() )
                 }
             }
     };

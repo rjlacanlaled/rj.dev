@@ -4,9 +4,8 @@ use maud::{ html, Markup, PreEscaped, DOCTYPE };
 
 fn body(content: Markup) -> Markup {
     html! {
-        body class="max-w-screen-xl px-6 py-12 mx-auto overflow-auto md:px-12 md:py-20 lg:px-24 lg:py-0 bg-slate-900 "
+        body ."max-w-screen-xl px-6 py-12 mx-auto overflow-auto md:px-12 md:py-20 lg:px-24 lg:py-0 bg-slate-900 font-sans"
         {
-            style { "font-family: Inter, sans-serif" }
             (content)
             script src="/js/htmx.min.js" {}
             script src="https://unpkg.com/hyperscript.org@0.9.12" {}
@@ -44,7 +43,6 @@ fn head(title: &str, desc: &str, url: &str) -> Markup {
             link rel="preconnect" href="https://fonts.googleapis.com";
             link rel="preconnect" href="https://fonts.gstatic.com" crossorigin;
             link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap";
-            
             link rel="stylesheet" href="/css/output.css";
         }
     }
