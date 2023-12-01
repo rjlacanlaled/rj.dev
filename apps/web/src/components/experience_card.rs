@@ -66,7 +66,7 @@ pub fn render(exp: Experience) -> Markup {
                 
                 @if let Some(position_progression) = exp.position_progression {
                     @for position in position_progression {
-                        span class="font-normal text-slate-500" { (position) }
+                        span class="text-sm font-normal text-slate-500" { (position) }
                     }
                 }
             }
