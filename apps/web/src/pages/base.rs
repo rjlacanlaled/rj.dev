@@ -4,7 +4,7 @@ use maud::{ html, Markup, PreEscaped, DOCTYPE };
 
 fn body(content: Markup) -> Markup {
     html! {
-        body ."max-w-screen-xl px-6 py-12 mx-auto overflow-auto md:px-12 md:py-20 lg:px-24 lg:py-0 bg-slate-900 font-sans"
+        body ."max-w-screen-xl mx-auto overflow-auto bg-slate-900 font-sans"
         {
             (content)
             script src="/js/htmx.min.js" {}

@@ -14,7 +14,7 @@ pub async fn page(req: HttpRequest) -> ActixResult<Markup> {
     let content =
         html! {
             div ."pointer-events-none inset-0 z-30 transition duration-300 lg:absolute" {
-                div class="w-full flex flex-col gap-[7rem]" {
+                div class="w-full flex flex-col gap-[5rem]" {
                     ( header::render() )
                     ( about_section::render() )
                     ( experience_section::render() )
