@@ -50,48 +50,53 @@ impl Project {
 
 pub fn render(exp: Experience) -> Markup {
     return html! {
-        div ."mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24 flex flex-col gap-2" {
-            span class="z-10 mt-1 mb-2 text-xs font-semibold tracking-wide uppercase text-slate-500 sm:col-span-2" { (format!("{} — {}", exp.from, exp.to)) }
-
-            div class ="flex flex-col" {
-                h3 class="font-medium leading-snug text-slate-200" {
-                    a class="inline-flex items-baseline text-base font-semibold leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link" {
-                        span class="absolute -inset-x-4 -inset-y-2.5 hidden rounded md:-inset-x-6 md:-inset-y-4 lg:block" {}
-                        div class="flex items-center gap-1" {
-                            span { (format!("{} · {}", exp.position, exp.company)) }
-                            img class="w-[16px]" src="/icons/arrow-up.svg" {}
+        div ."mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24 flex flex-col gap-2 md:grid md:grid-cols-4" {
+            div {
+                span class="z-10 mt-1 mb-2 text-xs font-semibold tracking-wide uppercase text-slate-500" { (format!("{} — {}", exp.from, exp.to)) }
+            }
+            
+            div class="flex flex-col gap-2 md:col-span-3" {
+                div class ="flex flex-col" {
+                    h3 class="font-medium leading-snug text-slate-200 " {
+                        a class="inline-flex items-baseline text-base font-semibold leading-tight text-slate-200 hover:text-teal-300 focus-visible:text-teal-300 group/link" {
+                            span class="absolute -inset-x-4 -inset-y-2.5 hidden rounded md:-inset-x-6 md:-inset-y-4 lg:block" {}
+                            div class="flex items-center gap-1" {
+                                span { (format!("{} · {}", exp.position, exp.company)) }
+                                img class="w-[16px]" src="/icons/arrow-up.svg" {}
+                            }
+                        }
+                    }
+                    
+                    @if let Some(position_progression) = exp.position_progression {
+                        @for position in position_progression {
+                            span class="text-sm font-normal text-slate-500" { (position) }
+                        }
+                    }
+                }
+    
+                p class="m-0 text-sm" { (exp.description) }
+    
+                @if let Some(projects) = exp.projects {
+                    ul class="flex flex-wrap mt-2" {
+                        @for project in projects {
+                            li class="mr-1.5 mt-2" { 
+                                span class="flex gap-1 text-sm font-medium text-slate-200" { 
+                                    img class="w-[12px]" src="/icons/clip.svg" {}
+                                    a href=(project.url) { (project.name)} 
+                                 }
+                            }
+                        }
+                    }
+                }
+    
+                @if let Some(technologies) = exp.technologies {
+                    ul class="flex flex-wrap gap-1 mt-2"{
+                        @for tech in technologies {
+                            li class="flex items-center px-3 py-1 text-xs font-medium leading-5 text-teal-300 rounded-full bg-teal-400/10 "{ (tech) }
                         }
                     }
                 }
                 
-                @if let Some(position_progression) = exp.position_progression {
-                    @for position in position_progression {
-                        span class="text-sm font-normal text-slate-500" { (position) }
-                    }
-                }
-            }
-
-            span class="text-sm" { (exp.description) }
-
-            @if let Some(projects) = exp.projects {
-                ul class="flex flex-wrap mt-2" {
-                    @for project in projects {
-                        li class="mr-1.5 mt-2" { 
-                            span class="flex gap-1 text-sm font-medium text-slate-200" { 
-                                img class="w-[12px]" src="/icons/clip.svg" {}
-                                a href=(project.url) { (project.name)} 
-                             }
-                        }
-                    }
-                }
-            }
-
-            @if let Some(technologies) = exp.technologies {
-                ul class="flex flex-wrap gap-1 mt-2"{
-                    @for tech in technologies {
-                        li class="flex items-center px-3 py-1 text-xs font-medium leading-5 text-teal-300 rounded-full bg-teal-400/10 "{ (tech) }
-                    }
-                }
             }
         }
     };
